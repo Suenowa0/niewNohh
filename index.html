@@ -1,217 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For Muskan ✦ A Little Universe</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
-</head>
-<body class="locked">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Muskan ✦ A Little Universe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="locked">
+    <!-- fine film-grain texture, sits above everything, purely decorative -->
+    <div class="grain" aria-hidden="true"></div>
 
-  <!-- fine film-grain texture, sits above everything, purely decorative -->
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- scroll progress -->
-  <div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
-
-  <!-- background layers (animate underneath the gate too, for atmosphere) -->
-  <canvas id="sky"></canvas>
-  <canvas id="galaxy"></canvas>
-  <div class="vignette" aria-hidden="true"></div>
-
-  <!-- ============ SIGNATURE GATE ============ -->
-  <div class="gate" id="gate">
-    <div class="gate-inner">
-      <p class="eyebrow">SIGN YOUR NAME TO OPEN</p>
-      <p class="gate-sub">Trace it, scribble it, make it messy — it just has to be yours.</p>
-
-      <div class="gate-canvas-wrap">
-        <p class="gate-ghost" id="gate-ghost" aria-hidden="true">Muskan</p>
-        <canvas id="gate-canvas"></canvas>
-      </div>
-
-      <p class="gate-hint" id="gate-hint">keep going — sign all the way across ✦</p>
-      <button type="button" class="ghost-btn gate-clear" id="gate-clear">clear and try again</button>
+    <!-- scroll progress -->
+    <div class="progress-rail" aria-hidden="true">
+      <div class="progress-fill" id="progress-fill"></div>
     </div>
-  </div>
 
-  <!-- ============ MAIN SITE (revealed once she signs) ============ -->
-  <main class="site" id="site">
+    <!-- background layers (animate underneath the gate too, for atmosphere) -->
+    <canvas id="sky"></canvas>
+    <canvas id="galaxy"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
 
-  <!-- ============ HERO ============ -->
-  <section id="hero" class="section">
-    <div class="hero-inner">
-      <div class="mark" aria-hidden="true">
-        <svg viewBox="0 0 120 70" class="mark-svg">
-          <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
-          <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
-          <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
-        </svg>
-      </div>
+    <!-- ============ SIGNATURE GATE ============ -->
+    <div class="gate" id="gate">
+      <div class="gate-inner">
+        <p class="eyebrow">SIGN YOUR NAME TO OPEN</p>
+        <p class="gate-sub">
+          Trace it, scribble it, make it messy — it just has to be yours.
+        </p>
 
-      <p class="eyebrow">A LITTLE UNIVERSE, JUST FOR YOU</p>
-      <h1 class="hero-title">For <em>Muskan</em></h1>
-      <p class="hero-sub">I mapped the sky and it's counting down to your day.</p>
-
-      <div class="countdown-panel">
-
-        <div class="countdown" id="countdown">
-          <div class="cd-node">
-            <span class="cd-num" id="cd-days">00</span>
-            <span class="cd-label">days</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-node">
-            <span class="cd-num" id="cd-hours">00</span>
-            <span class="cd-label">hours</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-node">
-            <span class="cd-num" id="cd-mins">00</span>
-            <span class="cd-label">mins</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-node">
-            <span class="cd-num" id="cd-secs">00</span>
-            <span class="cd-label">secs</span>
-          </div>
+        <div class="gate-canvas-wrap">
+          <p class="gate-ghost" id="gate-ghost" aria-hidden="true">Muskan</p>
+          <canvas id="gate-canvas"></canvas>
         </div>
+
+        <p class="gate-hint" id="gate-hint">
+          keep going — sign all the way across ✦
+        </p>
+        <button type="button" class="ghost-btn gate-clear" id="gate-clear">
+          clear and try again
+        </button>
       </div>
-
-      <p class="hero-hint">until September 8th</p>
     </div>
 
-    <button class="scroll-cue" id="scroll-cue" aria-label="Scroll down">
-      <span></span>
-    </button>
-  </section>
+    <!-- ============ MAIN SITE (revealed once she signs) ============ -->
+    <main class="site" id="site">
+      <!-- ============ HERO ============ -->
+      <section id="hero" class="section">
+        <div class="hero-inner">
+          <div class="mark" aria-hidden="true">
+            <svg viewBox="0 0 120 70" class="mark-svg">
+              <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+              <circle cx="10" cy="62" r="2.2" />
+              <circle cx="10" cy="8" r="2.2" />
+              <circle cx="62" cy="55" r="2.2" />
+              <circle cx="100" cy="8" r="2.2" />
+              <circle cx="100" cy="62" r="2.2" />
+            </svg>
+          </div>
 
-  <!-- ============ WISH STARS ============ -->
-  <section id="wishes" class="section">
-    <div class="section-head reveal">
-      <p class="eyebrow">TOUCH THE SKY</p>
-      <h2 class="section-title">Find every star</h2>
-      <p class="section-sub">
-        Eight small stars, eight small reasons. Tap each one — once you've found
-        them all, they'll draw themselves into something.
-      </p>
-    </div>
+          <p class="eyebrow">A LITTLE UNIVERSE, JUST FOR YOU</p>
+          <h1 class="hero-title">For <em>Muskan</em></h1>
+          <p class="hero-sub">
+            I tierd to map the sky and it's counting down to your day.
+          </p>
 
-    <div class="constellation-wrap reveal">
-      <svg id="constellation-lines" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="star-field" id="star-field"></div>
-    </div>
+          <div class="countdown-panel">
+            <div class="countdown" id="countdown">
+              <div class="cd-node">
+                <span class="cd-num" id="cd-days">00</span>
+                <span class="cd-label">days</span>
+              </div>
+              <span class="cd-sep">:</span>
+              <div class="cd-node">
+                <span class="cd-num" id="cd-hours">00</span>
+                <span class="cd-label">hours</span>
+              </div>
+              <span class="cd-sep">:</span>
+              <div class="cd-node">
+                <span class="cd-num" id="cd-mins">00</span>
+                <span class="cd-label">mins</span>
+              </div>
+              <span class="cd-sep">:</span>
+              <div class="cd-node">
+                <span class="cd-num" id="cd-secs">00</span>
+                <span class="cd-label">secs</span>
+              </div>
+            </div>
+          </div>
 
-    <p class="progress-text reveal"><span id="found-count">0</span> / 8 stars found</p>
+          <p class="hero-hint">until September 8th,2026</p>
+        </div>
 
-    <div class="wish-card" id="wish-card" hidden>
-      <span class="wish-quote" aria-hidden="true">&#10077;</span>
-      <button class="wish-close" id="wish-close" aria-label="Close">&times;</button>
-      <p id="wish-text"></p>
-    </div>
-  </section>
+        <button class="scroll-cue" id="scroll-cue" aria-label="Scroll down">
+          <span></span>
+        </button>
+      </section>
 
-  <!-- ============ MOMENTS / GALLERY ============ -->
-  <section id="moments" class="section">
-    <div class="section-head reveal">
-      <p class="eyebrow">KEEPSAKES</p>
-      <h2 class="section-title">A few moments</h2>
-      <p class="section-sub">Drop your favourite photos of you two into the frames below.</p>
-    </div>
+      <!-- ============ WISH STARS ============ -->
+      <section id="wishes" class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">TOUCH THE SKY</p>
+          <h2 class="section-title">Find every star</h2>
+          <p class="section-sub">
+            Eight small stars, eight small reasons. Tap each one — once you've
+            found them all, they'll draw themselves into something.
+          </p>
+        </div>
 
-    <div class="frame-row reveal">
-      <!--
+        <div class="constellation-wrap reveal">
+          <svg
+            id="constellation-lines"
+            viewBox="0 0 800 500"
+            preserveAspectRatio="xMidYMid meet"
+          ></svg>
+          <div class="star-field" id="star-field"></div>
+        </div>
+
+        <p class="progress-text reveal">
+          <span id="found-count">0</span> / 8 stars found
+        </p>
+
+        <div class="wish-card" id="wish-card" hidden>
+          <span class="wish-quote" aria-hidden="true">&#10077;</span>
+          <button class="wish-close" id="wish-close" aria-label="Close">
+            &times;
+          </button>
+          <p id="wish-text"></p>
+        </div>
+      </section>
+
+      <!-- ============ MOMENTS / GALLERY ============ -->
+      <section id="moments" class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">KEEPSAKES</p>
+          <h2 class="section-title">How i would describe you.</h2>
+          <p class="section-sub">
+            These photos deescribe you,how good hearted person you without
+            defining that.
+          </p>
+        </div>
+
+        <div class="frame-row reveal">
+          <!--
         HOW TO ADD YOUR OWN PHOTOS:
         1. Put your image files in an "images" folder next to this HTML file.
         2. Replace the src="" below with e.g. "images/photo1.jpg"
         3. Change the caption text in the figcaption.title if you'd like.
         4. Add or remove <figure class="frame"> blocks freely.
       -->
-      <figure class="frame">
-        <div class="frame-inner">
-          <img src="" alt="Add a photo of you two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="frame-placeholder"><span class="frame-plus">+</span><span>add photo</span></div>
+          <figure class="frame">
+            <div class="frame-inner">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIMYggC_xduH4DT7Y1K619_g3CfKcxyCWUaP9Z2JEyvHCJ5sA8KDOS5iM&s=10"
+                alt="Add a photo of you two"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="frame-placeholder">
+                <span class="frame-plus">+</span><span>add photo</span>
+              </div>
+            </div>
+            <figcaption class="frame-caption">one</figcaption>
+          </figure>
+          <figure class="frame">
+            <div class="frame-inner">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaFNcnMVpnQummoMfWM2yCkVnS6cp14vLQ8o0TlS-nDw&s"
+                alt="Add a photo of you two"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="frame-placeholder">
+                <span class="frame-plus">+</span><span>add photo</span>
+              </div>
+            </div>
+            <figcaption class="frame-caption">two</figcaption>
+          </figure>
+          <figure class="frame">
+            <div class="frame-inner">
+              <img
+                src="https://i1.sndcdn.com/artworks-KO096A5CavjKnode-gLNjvg-t500x500.jpg"
+                alt="Add a photo of you two"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="frame-placeholder">
+                <span class="frame-plus">+</span><span>add photo</span>
+              </div>
+            </div>
+            <figcaption class="frame-caption">three</figcaption>
+          </figure>
         </div>
-        <figcaption class="frame-caption">one</figcaption>
-      </figure>
-      <figure class="frame">
-        <div class="frame-inner">
-          <img src="" alt="Add a photo of you two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="frame-placeholder"><span class="frame-plus">+</span><span>add photo</span></div>
+      </section>
+
+      <!-- ============ REVEAL ============ -->
+      <section id="reveal" class="section">
+        <div id="locked-state" class="reveal">
+          <div class="seal" aria-hidden="true">
+            <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small">
+              <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+              <circle cx="10" cy="62" r="2.2" />
+              <circle cx="10" cy="8" r="2.2" />
+              <circle cx="62" cy="55" r="2.2" />
+              <circle cx="100" cy="8" r="2.2" />
+              <circle cx="100" cy="62" r="2.2" />
+            </svg>
+          </div>
+          <p class="eyebrow">SEALED UNTIL SEPTEMBER 8TH</p>
+          <h2 class="section-title">One more thing</h2>
+          <p class="section-sub">
+            There's a letter waiting here. It'll open itself on your day —
+          </p>
+          <button id="unlock-early" class="ghost-btn">
+            or open it early, if you can't wait
+          </button>
         </div>
-        <figcaption class="frame-caption">two</figcaption>
-      </figure>
-      <figure class="frame">
-        <div class="frame-inner">
-          <img src="" alt="Add a photo of you two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="frame-placeholder"><span class="frame-plus">+</span><span>add photo</span></div>
+
+        <div id="unlocked-state" class="letter-card" hidden>
+          <div class="burst" id="burst" aria-hidden="true"></div>
+          <div class="seal seal-lit" aria-hidden="true">
+            <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small">
+              <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+              <circle cx="10" cy="62" r="2.2" />
+              <circle cx="10" cy="8" r="2.2" />
+              <circle cx="62" cy="55" r="2.2" />
+              <circle cx="100" cy="8" r="2.2" />
+              <circle cx="100" cy="62" r="2.2" />
+            </svg>
+          </div>
+          <p class="eyebrow">HAPPY BIRTHDAY</p>
+          <h2 class="letter-title">Dear Muskan,</h2>
+          <div class="letter-body">
+            <p>
+              Happy Birthday! 🎂🥳 You’re honestly one of the most caring people
+              I know—although you never listen to me, always end up scolding me
+              😂, and somehow still manage to care about everything I do. You
+              overthink *way too much* 😭, so please relax sometimes and enjoy
+              life a little. Stay the same annoying, caring, and amazing person
+              you are. Hope you have a great birthday and an even better year
+              ahead! 🎉✨, also i tried my best to make a good website for you
+              as a gift, hoping you make like this...
+            </p>
+            <p>
+              Once again, Happy Birthday! 🎉🎂 Hope this year brings you lots of
+              happiness, success, peace, and reasons to smile.
+            </p>
+          </div>
+          <p class="letter-sign">— from your favourite constellation-builder</p>
+
+          <div class="star-note">
+            <label for="note-input"
+              >Leave a little wish for yourself in the sky</label
+            >
+            <div class="star-note-row">
+              <input
+                type="text"
+                id="note-input"
+                maxlength="60"
+                placeholder="Type something, then press add"
+              />
+              <button id="note-add">Add star</button>
+            </div>
+          </div>
         </div>
-        <figcaption class="frame-caption">three</figcaption>
-      </figure>
-    </div>
-  </section>
+      </section>
 
-  <!-- ============ REVEAL ============ -->
-  <section id="reveal" class="section">
-    <div id="locked-state" class="reveal">
-      <div class="seal" aria-hidden="true">
-        <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small">
-          <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
-          <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
-          <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
-        </svg>
-      </div>
-      <p class="eyebrow">SEALED UNTIL SEPTEMBER 8TH</p>
-      <h2 class="section-title">One more thing</h2>
-      <p class="section-sub">There's a letter waiting here. It'll open itself on your day —</p>
-      <button id="unlock-early" class="ghost-btn">or open it early, if you can't wait</button>
-    </div>
+      <footer class="footer">
+        <div class="footer-rule" aria-hidden="true"></div>
+        <p>made with care, one star at a time ✦</p>
+      </footer>
+    </main>
 
-    <div id="unlocked-state" class="letter-card" hidden>
-      <div class="burst" id="burst" aria-hidden="true"></div>
-      <div class="seal seal-lit" aria-hidden="true">
-        <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small">
-          <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
-          <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
-          <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
-        </svg>
-      </div>
-      <p class="eyebrow">HAPPY BIRTHDAY</p>
-      <h2 class="letter-title">Dear Muskan,</h2>
-      <div class="letter-body">
-        <p>
-          This site is a small, silly, over-engineered way of saying: I'm really
-          glad you exist. [Replace this paragraph with your real letter — talk
-          about a memory, something you admire about her, an inside joke,
-          whatever feels like you.]
-        </p>
-        <p>
-          Here's to another year of the same chaos, the same laughs, and the
-          same person I'm lucky to call a friend.
-        </p>
-      </div>
-      <p class="letter-sign">— from your favourite constellation-builder</p>
-
-      <div class="star-note">
-        <label for="note-input">Leave a little wish for yourself in the sky</label>
-        <div class="star-note-row">
-          <input type="text" id="note-input" maxlength="60" placeholder="Type something, then press add" />
-          <button id="note-add">Add star</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="footer-rule" aria-hidden="true"></div>
-    <p>made with care, one star at a time ✦</p>
-  </footer>
-
-  </main>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
