@@ -1,18 +1,18 @@
 /* ============================================================
    0. CONFIG
    ============================================================ */
-const BIRTHDAY_MONTH = 9;   // September
-const BIRTHDAY_DAY   = 8;
+const BIRTHDAY_MONTH = 9; // September
+const BIRTHDAY_DAY = 8;
 
 const WISHES = [
-  "That time you made me laugh so hard I couldn't breathe.",
-  "You always remember the small stuff. That's rare.",
+  "Don’t overthink what you can’t control..",
+  "Choose peace over unnecessary worries.",
   "Thank you for being my personal hype committee.",
   "You've got the kind of honesty I actually trust.",
   "Every plan is better when you're in it.",
   "You make ordinary days feel like an event.",
-  "I'm genuinely lucky to have you as a friend.",
-  "Here's to more chaos, more inside jokes, more us."
+  "Keep your heart kind and your mind calm",
+  "Here's to more chaos, more inside jokes, more us.",
 ];
 
 // positions in an 800x500 canvas — the first 5 trace an "M"
@@ -24,9 +24,14 @@ const STAR_POINTS = [
   { x: 690, y: 430 },
   { x: 260, y: 200 },
   { x: 540, y: 250 },
-  { x: 400, y: 60 }
+  { x: 400, y: 60 },
 ];
-const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
+const CONNECTIONS = [
+  [0, 1],
+  [1, 2],
+  [2, 3],
+  [3, 4],
+];
 
 /* ============================================================
    1. SIGNATURE GATE — she has to sign/trace her name to open
@@ -41,13 +46,15 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
   const site = document.getElementById("site");
   const body = document.body;
 
-  const MIN_LENGTH = 480;      // roughly how much "ink" she needs to lay down
-  const MIN_SPREAD = 0.45;     // and it has to stretch across at least ~45% of the box
+  const MIN_LENGTH = 480; // roughly how much "ink" she needs to lay down
+  const MIN_SPREAD = 0.45; // and it has to stretch across at least ~45% of the box
 
   let drawing = false;
   let unlocked = false;
   let lastPoint = null;
-  let minX = Infinity, maxX = -Infinity, totalLength = 0;
+  let minX = Infinity,
+    maxX = -Infinity,
+    totalLength = 0;
   let hintTimer = null;
 
   function setupCanvas() {
@@ -123,7 +130,9 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
     gate.classList.add("unlocked");
     body.classList.remove("locked");
     site.classList.add("revealed");
-    setTimeout(() => { gate.style.display = "none"; }, 1100);
+    setTimeout(() => {
+      gate.style.display = "none";
+    }, 1100);
   }
 
   function clearCanvas() {
@@ -139,7 +148,9 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
   canvas.addEventListener("pointermove", moveStroke);
   window.addEventListener("pointerup", endStroke);
   clearBtn.addEventListener("click", clearCanvas);
-  window.addEventListener("resize", () => { if (!unlocked) setupCanvas(); });
+  window.addEventListener("resize", () => {
+    if (!unlocked) setupCanvas();
+  });
 
   setupCanvas();
   scheduleHint();
@@ -151,8 +162,13 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
 (function ambientSky() {
   const canvas = document.getElementById("sky");
   const ctx = canvas.getContext("2d");
-  let w, h, stars, shootingStars = [];
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let w,
+    h,
+    stars,
+    shootingStars = [];
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   function resize() {
     w = canvas.width = window.innerWidth;
@@ -163,7 +179,7 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
       y: Math.random() * h,
       r: Math.random() * 1.3 + 0.3,
       phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.015 + 0.005
+      speed: Math.random() * 0.015 + 0.005,
     }));
   }
 
@@ -176,7 +192,7 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
         y: Math.random() * h * 0.35,
         vx: (goingRight ? 1 : -1) * (7 + Math.random() * 5),
         vy: 3.5 + Math.random() * 2.5,
-        life: 1
+        life: 1,
       });
     }
   }
@@ -219,13 +235,15 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
     }
 
     maybeSpawnShootingStar();
-    shootingStars.forEach(ss => {
+    shootingStars.forEach((ss) => {
       drawShootingStar(ss);
       ss.x += ss.vx;
       ss.y += ss.vy;
       if (ss.y > h * 0.55) ss.life -= 0.03;
     });
-    shootingStars = shootingStars.filter(ss => ss.life > 0 && ss.x < w + 100 && ss.y < h + 100 && ss.x > -100);
+    shootingStars = shootingStars.filter(
+      (ss) => ss.life > 0 && ss.x < w + 100 && ss.y < h + 100 && ss.x > -100
+    );
 
     requestAnimationFrame(draw);
   }
@@ -241,9 +259,15 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
 (function galaxyOnScroll() {
   const canvas = document.getElementById("galaxy");
   const ctx = canvas.getContext("2d");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-  let w, h, arms, blobs, t = 0;
+  let w,
+    h,
+    arms,
+    blobs,
+    t = 0;
 
   function resize() {
     w = canvas.width = window.innerWidth;
@@ -270,18 +294,29 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
         arms.push({
           baseAngle: angle,
           radius: radius + jitter,
-          cx, cy,
+          cx,
+          cy,
           size: (1 - frac) * 1.8 + 0.4,
           color: palette[Math.floor(Math.random() * palette.length)],
-          twinklePhase: Math.random() * Math.PI * 2
+          twinklePhase: Math.random() * Math.PI * 2,
         });
       }
     }
 
     blobs = [
       { x: cx, y: cy, r: maxRadius * 0.55, color: "169,155,214" },
-      { x: cx - maxRadius * 0.2, y: cy + maxRadius * 0.15, r: maxRadius * 0.4, color: "230,193,124" },
-      { x: cx + maxRadius * 0.25, y: cy - maxRadius * 0.1, r: maxRadius * 0.35, color: "217,169,163" }
+      {
+        x: cx - maxRadius * 0.2,
+        y: cy + maxRadius * 0.15,
+        r: maxRadius * 0.4,
+        color: "230,193,124",
+      },
+      {
+        x: cx + maxRadius * 0.25,
+        y: cy - maxRadius * 0.1,
+        r: maxRadius * 0.35,
+        color: "217,169,163",
+      },
     ];
   }
 
@@ -307,7 +342,7 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
       ctx.scale(scale, scale);
       ctx.translate(-w * 0.5, -h * 0.42);
 
-      blobs.forEach(b => {
+      blobs.forEach((b) => {
         const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
         grad.addColorStop(0, `rgba(${b.color},0.16)`);
         grad.addColorStop(1, `rgba(${b.color},0)`);
@@ -317,11 +352,13 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
         ctx.fill();
       });
 
-      arms.forEach(p => {
+      arms.forEach((p) => {
         const angle = p.baseAngle + (reduceMotion ? 0 : t * 0.00015);
         const x = p.cx + Math.cos(angle) * p.radius;
         const y = p.cy + Math.sin(angle) * p.radius * 0.55;
-        const twinkle = reduceMotion ? 1 : 0.6 + Math.sin(t * 0.002 + p.twinklePhase) * 0.4;
+        const twinkle = reduceMotion
+          ? 1
+          : 0.6 + Math.sin(t * 0.002 + p.twinklePhase) * 0.4;
 
         ctx.beginPath();
         ctx.fillStyle = p.color;
@@ -352,7 +389,7 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
   function update() {
     const max = document.body.scrollHeight - window.innerHeight;
     const frac = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-    fill.style.width = (frac * 100) + "%";
+    fill.style.width = frac * 100 + "%";
     ticking = false;
   }
 
@@ -372,19 +409,22 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
 (function scrollReveal() {
   const targets = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window) || targets.length === 0) {
-    targets.forEach(el => el.classList.add("in-view"));
+    targets.forEach((el) => el.classList.add("in-view"));
     return;
   }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+  );
 
-  targets.forEach(el => observer.observe(el));
+  targets.forEach((el) => observer.observe(el));
 })();
 
 /* ============================================================
@@ -395,7 +435,8 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
     const now = new Date();
     const year = now.getFullYear();
     let target = new Date(year, BIRTHDAY_MONTH - 1, BIRTHDAY_DAY, 0, 0, 0);
-    if (target <= now) target = new Date(year + 1, BIRTHDAY_MONTH - 1, BIRTHDAY_DAY, 0, 0, 0);
+    if (target <= now)
+      target = new Date(year + 1, BIRTHDAY_MONTH - 1, BIRTHDAY_DAY, 0, 0, 0);
     return target;
   }
 
@@ -404,7 +445,7 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
     days: document.getElementById("cd-days"),
     hours: document.getElementById("cd-hours"),
     mins: document.getElementById("cd-mins"),
-    secs: document.getElementById("cd-secs")
+    secs: document.getElementById("cd-secs"),
   };
 
   function tick() {
@@ -437,7 +478,8 @@ const CONNECTIONS = [[0, 1], [1, 2], [2, 3], [3, 4]];
 /* ============================================================
    7. WISH STARS / CONSTELLATION
    ============================================================ */
-const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 0l2.5 7.9L22 8.5l-6.2 5 2.2 8L12 17l-6 4.5 2.2-8L2 8.5l7.5-.6z"/></svg>';
+const STAR_SVG =
+  '<svg viewBox="0 0 24 24"><path d="M12 0l2.5 7.9L22 8.5l-6.2 5 2.2 8L12 17l-6 4.5 2.2-8L2 8.5l7.5-.6z"/></svg>';
 
 (function wishStars() {
   const field = document.getElementById("star-field");
@@ -449,7 +491,8 @@ const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 0l2.5 7.9L22 8.5l-6.2 5 
   const found = new Set();
 
   const lineEls = CONNECTIONS.map(([a, b]) => {
-    const p1 = STAR_POINTS[a], p2 = STAR_POINTS[b];
+    const p1 = STAR_POINTS[a],
+      p2 = STAR_POINTS[b];
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
     line.setAttribute("x1", p1.x);
     line.setAttribute("y1", p1.y);
@@ -462,9 +505,9 @@ const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 0l2.5 7.9L22 8.5l-6.2 5 
   STAR_POINTS.forEach((pt, i) => {
     const btn = document.createElement("button");
     btn.className = "wish-star";
-    btn.style.left = (pt.x / 800 * 100) + "%";
-    btn.style.top = (pt.y / 500 * 100) + "%";
-    btn.style.animationDelay = (Math.random() * 3) + "s";
+    btn.style.left = (pt.x / 800) * 100 + "%";
+    btn.style.top = (pt.y / 500) * 100 + "%";
+    btn.style.animationDelay = Math.random() * 3 + "s";
     btn.setAttribute("aria-label", "Reveal a star");
     btn.innerHTML = STAR_SVG;
 
@@ -473,7 +516,7 @@ const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 0l2.5 7.9L22 8.5l-6.2 5 
         found.add(i);
         btn.classList.add("found");
         countLabel.textContent = found.size;
-        lineEls.forEach(l => {
+        lineEls.forEach((l) => {
           if (found.has(l.a) && found.has(l.b)) l.el.classList.add("lit");
         });
       }
@@ -484,7 +527,9 @@ const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 0l2.5 7.9L22 8.5l-6.2 5 
     field.appendChild(btn);
   });
 
-  closeBtn.addEventListener("click", () => { card.hidden = true; });
+  closeBtn.addEventListener("click", () => {
+    card.hidden = true;
+  });
 })();
 
 /* ============================================================
@@ -516,10 +561,13 @@ function spawnBurst() {
     p.style.left = "0";
     p.style.top = "0";
     p.style.opacity = "1";
-    p.style.transition = "transform 1s cubic-bezier(.2,.8,.2,1), opacity 1s ease";
+    p.style.transition =
+      "transform 1s cubic-bezier(.2,.8,.2,1), opacity 1s ease";
     burst.appendChild(p);
     requestAnimationFrame(() => {
-      p.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`;
+      p.style.transform = `translate(${Math.cos(angle) * dist}px, ${
+        Math.sin(angle) * dist
+      }px)`;
       p.style.opacity = "0";
     });
   }
@@ -533,7 +581,9 @@ document.getElementById("unlock-early").addEventListener("click", unlockReveal);
 
 // cursor trail
 (function cursorTrail() {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
   const isTouch = window.matchMedia("(hover: none)").matches;
   if (reduceMotion || isTouch) return;
 
@@ -565,7 +615,9 @@ document.getElementById("unlock-early").addEventListener("click", unlockReveal);
     const rect = hero.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
-    title.style.transform = `perspective(600px) rotateX(${py * -6}deg) rotateY(${px * 8}deg)`;
+    title.style.transform = `perspective(600px) rotateX(${
+      py * -6
+    }deg) rotateY(${px * 8}deg)`;
   });
   hero.addEventListener("pointerleave", () => {
     title.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
@@ -578,7 +630,7 @@ document.getElementById("unlock-early").addEventListener("click", unlockReveal);
   const RADIUS = 70;
   const STRENGTH = 0.35;
 
-  targets.forEach(el => {
+  targets.forEach((el) => {
     el.classList.add("magnetic");
     window.addEventListener("pointermove", (e) => {
       const rect = el.getBoundingClientRect();
@@ -588,7 +640,9 @@ document.getElementById("unlock-early").addEventListener("click", unlockReveal);
       const dy = e.clientY - cy;
       const dist = Math.hypot(dx, dy);
       if (dist < RADIUS) {
-        el.style.transform = `translate(${dx * STRENGTH}px, ${dy * STRENGTH}px)`;
+        el.style.transform = `translate(${dx * STRENGTH}px, ${
+          dy * STRENGTH
+        }px)`;
       } else {
         el.style.transform = "translate(0, 0)";
       }
@@ -598,15 +652,18 @@ document.getElementById("unlock-early").addEventListener("click", unlockReveal);
 
 // gallery frame 3D tilt
 (function frameTilt() {
-  document.querySelectorAll(".frame-inner").forEach(frame => {
+  document.querySelectorAll(".frame-inner").forEach((frame) => {
     frame.addEventListener("pointermove", (e) => {
       const rect = frame.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width - 0.5;
       const py = (e.clientY - rect.top) / rect.height - 0.5;
-      frame.style.transform = `perspective(700px) rotateX(${py * -10}deg) rotateY(${px * 10}deg) scale(1.03)`;
+      frame.style.transform = `perspective(700px) rotateX(${
+        py * -10
+      }deg) rotateY(${px * 10}deg) scale(1.03)`;
     });
     frame.addEventListener("pointerleave", () => {
-      frame.style.transform = "perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)";
+      frame.style.transform =
+        "perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)";
     });
   });
 })();
@@ -634,9 +691,13 @@ document.getElementById("unlock-early").addEventListener("click", unlockReveal);
       const saved = JSON.parse(localStorage.getItem("muskan-notes") || "[]");
       saved.push(text);
       localStorage.setItem("muskan-notes", JSON.stringify(saved));
-    } catch (e) { /* localStorage unavailable, skip silently */ }
+    } catch (e) {
+      /* localStorage unavailable, skip silently */
+    }
   }
 
   btn.addEventListener("click", addNote);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") addNote(); });
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") addNote();
+  });
 })();
